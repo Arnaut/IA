@@ -1,17 +1,33 @@
 # Makefile
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
-CC = gcc
-CPPFLAGS = -MMD
-CFLAGS = -Wall -Wextra -std=c99 -O2
-LDFLAGS =
-LDLIBS = 
+SOURCE      = $(call rwildcard, *.c)
+OBJS        = $(SOURCE:%.c=_build/%.o)
+HEADER      = $(SOURCE:.c=.h)
+OUT         = COOLRAOUL.exe
+CC          = gcc
+FLAGS       = -O3
+DEBUG_FLAGS = -O0
 
-EXE = main neuralnetwork IAtoolsbox
+CFLAGS      =  -Wall -Wextra -Werror -std=c99 `pkg-config --cflags gtk+-3.0`
+SDL_FLAGS   = `sdl-config --cflags --libs` -lSDL_image -lSDL_gfx `pkg-config --libs gtk+-3.0`
+CPPFLAGS= `pkg-config --cflags sdl` -MMD `pkg-config --libs gtk+-3.0`
+LDLIBS= `pkg-config --libs sdl` -lSDL_image `pkg-config --libs gtk+-3.0`
 
-all: $(EXE)
+
+CPPFLAGS= `pkg-config --cflags sdl` -MMD
+LDLIBS= `pkg-config --libs sdl` -lSDL_image
+
+all: $(OBJS)
+    $(CC) $(FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
+
+debug: $(OBJS)
+    $(CC) $(DEBUG_FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
+
+_build/%.o: %.c
+    mkdir -p $(dir $@)
+    $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $(^:_build=)
 
 clean:
-	${RM} $(EXE)
-	${RM} *.o
-	${RM} *.d
+    rm -fr $(OBJS) $(OUT)
 # END
