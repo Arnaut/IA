@@ -3,10 +3,11 @@
 
 #include "IAtoolsbox.h"
 #include "neuralnetwork.h"
+#include <time.h>
 
 // data
-int* InputList = [0, 0];
-int* sizesList = [8, 8, 2];
+int InputList[2] = {0, 0};
+int sizesList[3] = {8, 8, 2};
 int sizeoflist = 3;
 int sizeofInput = 2;
 
@@ -45,6 +46,7 @@ struct NeuralNetwork initNN()
                         .bias = (double)rand()/RAND_MAX,
                         .weights = tab3,
                     };
+            l.NeuronList[k] = n;
         }
         psize = size;
         nn.LayerList[i] = l;
