@@ -5,7 +5,7 @@
 #include "neuralnetwork.h"
 
 int main() {
-    NeuralNetwork nn = initNN();
+    struct NeuralNetwork nn = initNN();
     int r = nn.LayerList[0].size;
     printf("%d",r);
     return 0;

@@ -34,7 +34,7 @@ typedef struct NeuralNetwork
 } NeuralNetwork;
 
 // NeuralNetwork Methods.
-NeuralNetwork initNN()
+struct NeuralNetwork initNN()
 {
     Layer tab1[sizeoflist];
     NeuralNetwork nn =
