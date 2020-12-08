@@ -46,7 +46,7 @@ struct NeuralNetwork initNN()
                         .bias = (double)rand()/RAND_MAX,
                         .weights = tab3,
                     };
-            l.NeuronList[k] = n;
+            l.NeuronList[j] = n;
         }
         psize = size;
         nn.LayerList[i] = l;
