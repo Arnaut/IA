@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c99 -O2
 LDFLAGS =
 LDLIBS = 
 
-EXE = main
+EXE = main neuralnetwork IAtoolsbox
 
 all: $(EXE)
 
