@@ -37,14 +37,14 @@ struct NeuralNetwork initNN()
             float tab3[psize];
             for (int k = 0; k < psize; ++k)
             {
-                tab3[k] = ((float)rand()/(float)(RAND_MAX)) * a);
+                tab3[k] = ((float)rand()/(float)(RAND_MAX)) * a;
             }
             Neuron n =
                     {
                         .net = 0,
                         .val = 0,
                         .size = psize,
-                        .bias = ((float)rand()/(float)(RAND_MAX)) * a),
+                        .bias = ((float)rand()/(float)(RAND_MAX)) * a,
                         .weights = tab3,
                     };
             l.NeuronList[j] = n;
