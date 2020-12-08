@@ -3,6 +3,8 @@
 
 #include "IAtoolsbox.h"
 #include "neuralnetwork.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 // data
