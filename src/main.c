@@ -6,7 +6,7 @@
 
 int main() {
     struct NeuralNetwork nn = initNN();
-    int r = nn.LayerList[0].size;
-    printf("%d",r);
+    int r = nn.LayerList[2].size;
+    printf("%d \n",r);
     return 0;
 }
