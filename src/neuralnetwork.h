@@ -7,10 +7,10 @@
 // NeuralNetwork structure.
 typedef struct Neuron
 {
-    double net;          // Sum of weights times L-1 values + bias.
-    double val;          // Sigmoid of net.
-    double bias;         // Bias of the Neuron.
-    double* weights;     // Weights toward L-1.
+    float net;          // Sum of weights times L-1 values + bias.
+    float val;          // Sigmoid of net.
+    float bias;         // Bias of the Neuron.
+    float* weights;     // Weights toward L-1.
     int size;           // Size of L-1.
 } Neuron;
 

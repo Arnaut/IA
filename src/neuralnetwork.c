@@ -22,6 +22,7 @@ struct NeuralNetwork initNN()
                     .LayerList = tab1,
             };
     int psize = sizeofInput;
+    double a = 5.0;
     for (int i = 0; i < sizeoflist; ++i)
     {
         int size = sizesList[i];
@@ -33,17 +34,17 @@ struct NeuralNetwork initNN()
                 };
         for (int j = 0; j < size; ++j)
         {
-            double tab3[psize];
+            float tab3[psize];
             for (int k = 0; k < psize; ++k)
             {
-                tab3[k] = (double)rand()/RAND_MAX;
+                tab3[k] = ((float)rand()/(float)(RAND_MAX)) * a;
             }
             Neuron n =
                     {
                         .net = 0,
                         .val = 0,
                         .size = psize,
-                        .bias = (double)rand()/RAND_MAX,
+                        .bias = ((float)rand()/(float)(RAND_MAX)) * aX,
                         .weights = tab3,
                     };
             l.NeuronList[j] = n;
