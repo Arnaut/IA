@@ -14,20 +14,19 @@ SDL_FLAGS   = `sdl-config --cflags --libs` -lSDL_image -lSDL_gfx `pkg-config --l
 CPPFLAGS= `pkg-config --cflags sdl` -MMD `pkg-config --libs gtk+-3.0`
 LDLIBS= `pkg-config --libs sdl` -lSDL_image `pkg-config --libs gtk+-3.0`
 
-
 CPPFLAGS= `pkg-config --cflags sdl` -MMD
 LDLIBS= `pkg-config --libs sdl` -lSDL_image
 
 all: $(OBJS)
-    $(CC) $(FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
+	$(CC) $(FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
 
 debug: $(OBJS)
-    $(CC) $(DEBUG_FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
+	$(CC) $(DEBUG_FLAGS) -g $(OBJS) -o $(OUT) ${SDL_FLAGS} -lm -ldl
 
 _build/%.o: %.c
-    mkdir -p $(dir $@)
-    $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $(^:_build=)
+	mkdir -p $(dir $@)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $(^:_build=)
 
 clean:
-    rm -fr $(OBJS) $(OUT) _build/ *.jpg
+	rm -fr $(OBJS) $(OUT) _build/ *.jpg
 # END
