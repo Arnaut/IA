@@ -4,7 +4,7 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 SOURCE      = $(call rwildcard, src/, *.c)
 OBJS        = $(SOURCE:%.c=_build/%.o)
 HEADER      = $(SOURCE:.c=.h)
-OUT         = COOLRAOUL.exe
+OUT         = CText.exe
 CC          = gcc
 FLAGS       = -O3
 DEBUG_FLAGS = -O0
@@ -29,5 +29,5 @@ _build/%.o: %.c
     $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $(^:_build=)
 
 clean:
-    rm -fr $(OBJS) $(OUT)
+    rm -fr $(OBJS) $(OUT) _build/ *.jpg
 # END
