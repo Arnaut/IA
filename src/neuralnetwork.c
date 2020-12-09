@@ -1,4 +1,4 @@
-// Authors: Arnaut.Leyre
+// Authors: Arnaut.Leyre / Nicolas.Le-lan
 // 07.12.2020/19:15
 
 #include "IAtoolsbox.h"
@@ -9,7 +9,7 @@
 
 // data
 int InputList[2] = {0, 0};
-int sizesList[3] = {8, 8, 2};
+int sizesList[3] = {8, 8, 1};
 int sizeoflist = 3;
 int sizeofInput = 2;
 
@@ -20,6 +20,7 @@ struct NeuralNetwork initNN()
     NeuralNetwork nn =
             {
                     .size = sizeoflist,
+                    .inputsize = sizeofInput,
                     .InputLayer = InputList,
                     .LayerList = tab1,
             };
@@ -55,4 +56,32 @@ struct NeuralNetwork initNN()
         nn.LayerList[i] = l;
     }
     return nn;
+}
+
+// Methods:Propagation
+void RunLayers(struct Layer L,struct Layer Lminus1){
+  for( size_t i=0; i<L.size;i++){
+    L.NeuronList[i].net = L.NeuronList[i].bias;
+    for(size_t j; j<Lminus1.size; j++)
+    {
+      L.NeuronList[i].net += Lminus1.NeuronList[j].val*L.NeuronList[i].weights[j];
+    }
+    L.NeuronList[i].val = sigmoid(L.NeuronList[i].net);
+  }
+}
+  
+
+void RunNeuralNetwork(struct NeuralNetwork nn, int* Input){
+  nn.InputLayer = Input;
+  //init first layer
+  for (size_t i=0; i<nn.LayerList[0].size; i++){
+    nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
+    for (size_t j=0 ; j<nn.inputsize; j++){
+      nn.LayerList[0].NeuronList[i].net += Input[i]*nn.LayerList[0].NeuronList[i].weights[j];
+    }
+    nn.LayerList[0].NeuronList[i].val = sigmoid(nn.LayerList[0].NeuronList[i].net);
+  }
+  for (size_t l=1; l<nn.size; l++){
+    RunLayers(nn.LayerList[l],nn.LayerList[l-1]);
+  }
 }

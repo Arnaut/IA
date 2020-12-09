@@ -1,4 +1,4 @@
-// Authors: Arnaut.Leyre
+// Authors: Arnaut.Leyre / Nicolas.Le-lan
 // 08.12.2020/18:49
 
 #ifndef NEURALNETWORK_H
@@ -25,8 +25,11 @@ typedef struct NeuralNetwork
     int* InputLayer;    // Layer that the IA Input.
     Layer* LayerList;   // List of all Layers of the NeuralNetwork.
     int size;           // Number of Layers not including InputLayer.
+    int inputsize;      // Size of Input.
 } NeuralNetwork;
 
 NeuralNetwork initNN();
+void RunLayers(struct Layer L,struct Layer Lminus1);
+void RunNeuralNetwork(struct NeuralNetwork nn, int* Input);
 
 #endif
