@@ -3,6 +3,11 @@
 
 #include "IAtoolsbox.h"
 #include "data.h"
+// data
+int sizeoflist = 3;
+int sizeofInput = 2;
+int InputList[2] = {0, 0};
+int sizesList[3] = {8, 8, 1};
 #include "neuralnetwork.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,7 +61,8 @@ struct NeuralNetwork initNN()
 
 // Methods:Propagation
 void RunLayers(Layer L,Layer Lminus1){
-    for(int i=0; i<L.size;i++){
+    for(int i=0; i<L.size;i++)
+    {
         L.NeuronList[i].net = L.NeuronList[i].bias;
         for(int j; j<Lminus1.size; j++)
         {
@@ -69,24 +75,19 @@ void RunLayers(Layer L,Layer Lminus1){
 
 void RunNeuralNetwork(NeuralNetwork nn, int* Input)
 {
-    printf("yup\n");
     nn.InputLayer = Input;
-    printf("yup1\n");
     //init first layer
-    printf("i: %i]\n",nn.LayerList[0].size);
     for (int i=0; i<nn.LayerList[0].size; i++)
     {
-        printf("i: %i]\n",i);
         nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
         for (int j=0 ; j<nn.inputsize; j++)
         {
-            printf("j: %i]\n",j);
             nn.LayerList[0].NeuronList[i].net += Input[i]*nn.LayerList[0].NeuronList[i].weights[j];
         }
         nn.LayerList[0].NeuronList[i].val = sigmoid(nn.LayerList[0].NeuronList[i].net);
     }
-    for (int l=1; l<nn.size; l++){
-        printf("l: %i]\n",l);
+    for (int l=1; l<nn.size; l++)
+    {
         RunLayers(nn.LayerList[l],nn.LayerList[l-1]);
     }
 }
