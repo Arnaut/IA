@@ -11,6 +11,7 @@
 // NeuralNetwork Methods.
 struct NeuralNetwork initNN()
 {
+    printf("init\n");
     Layer tab1[sizeoflist];
     NeuralNetwork nn =
             {
