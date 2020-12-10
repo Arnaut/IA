@@ -2,6 +2,7 @@
 // 07.12.2020/19:15
 
 #include <stdio.h>
+#include "data.h"
 #include "neuralnetwork.h"
 #include "training.h"
 

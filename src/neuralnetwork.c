@@ -2,16 +2,12 @@
 // 07.12.2020/19:15
 
 #include "IAtoolsbox.h"
+#include "data.h"
 #include "neuralnetwork.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-// data
-int InputList[2] = {0, 0};
-int sizesList[3] = {8, 8, 1};
-int sizeoflist = 3;
-int sizeofInput = 2;
 
 // NeuralNetwork Methods.
 struct NeuralNetwork initNN()
