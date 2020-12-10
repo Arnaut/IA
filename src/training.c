@@ -152,7 +152,7 @@ struct NeuralNetwork ApplyGradient(NeuralNetwork nn, GNetwork gn)
 
 struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data, NeuralNetwork nn)
 {
-    //GNetwork gn = initGradient();
+    GNetwork gn = initGradient();
     for (int t = 0; t < data; ++t)
     {
         int Input[sizeofInputT];
@@ -171,8 +171,8 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
         printf("yup\n");
         printTry(nn, Input, Output);
         printf("yup\n");
-        //gn = MakeGradient(gn, nn, Output);
-        //nn = ApplyGradient(nn, gn);
+        gn = MakeGradient(gn, nn, Output);
+        nn = ApplyGradient(nn, gn);
     }
     return nn;
 }
