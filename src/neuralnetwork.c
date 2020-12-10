@@ -75,6 +75,7 @@ void RunNeuralNetwork(NeuralNetwork nn, int* Input)
 {
     printf("yup\n");
     nn.InputLayer = Input;
+    printf("yup\n");
     //init first layer
     printf("i : %i",nn.LayerList[0].size);
     for (int i=0; i<nn.LayerList[0].size; i++)
