@@ -169,10 +169,10 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
         printf("yup\n");
         RunNeuralNetwork(nn, Input);
         printf("yup\n");
-        //gn = MakeGradient(gn,nn,Output);
+        printTry(nn, Input, Output);
         printf("yup\n");
-        printTry(nn,Input,Output);
-        nn = ApplyGradient(nn,gn);
+        //gn = MakeGradient(gn, nn, Output);
+        //nn = ApplyGradient(nn, gn);
     }
     return nn;
 }
