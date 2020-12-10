@@ -76,7 +76,6 @@ float derivativeValue(Neuron n,int k,Layer fl)
 
 void printTry(NeuralNetwork nn, int* Input, int* Output)
 {
-    printf("|");
     int l = sizeofListeT - 1;
     for (int n = 0; n < sizesListT[l]; ++n)
     {
