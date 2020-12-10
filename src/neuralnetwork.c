@@ -73,6 +73,7 @@ void RunLayers(Layer L,Layer Lminus1){
 
 void RunNeuralNetwork(NeuralNetwork nn, int* Input)
 {
+    printf("yup\n");
     nn.InputLayer = Input;
     //init first layer
     printf("i : %i",nn.LayerList[0].size);
