@@ -173,8 +173,8 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
             printf("Output : %i\n",index);
             printf("trainOutput[index]: %i",trainOutput[index]);
             printf("u : %i\n",u);
-            printf("Output[u]: %i",Output[u]);
-            Output[u] = trainOutput[index];
+            printf("Output[u]: %i",Output[0]);
+            Output[0] = trainOutput[index];
             printf("yup");
         }
         RunNeuralNetwork(nn, Input);
