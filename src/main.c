@@ -13,7 +13,7 @@ int main() {
     int nbtrain = 500;
     for (int i = 1; i <= nbtrain; ++i)
     {
-        printf("===== training:%d =====",i);
+        printf("===== training:%i =====",i);
         nn = backpropagation(tab1, tab2, 4, nn);
     }
     return 0;

@@ -72,33 +72,34 @@ float derivativeValue(Neuron n,int k,Layer fl)
 
 void printTry(NeuralNetwork nn, int* Input, int* Output)
 {
-    char* s = "|";
+    printf("|");
     int l = sizeoflist - 1;
     for (int n = 0; n < sizesList[l]; ++n)
     {
         Neuron ner = nn.LayerList[l].NeuronList[n];
-        s += "|" + (char*)ner.val + "|";
+        printf("|");
+        printf("%f",ner.val);
+        printf("|");
     }
-    s += ": [";
+    printf(": [");
     for (int i = 0; i < sizeofInput; ++i)
     {
-        s += (char)Input[i];
+        printf("%i",Input[i]);
         if (i != sizeofInput-1)
         {
-            s += ";";
+            printf(";");
         }
     }
-    s += "] => [";
+    printf("] => [");
     for (int j = 0; j < sizesList[sizeoflist-1]; ++j)
     {
-        s += (char) Output[j];
+        printf("%i",Output[j]);
         if (j != sizesList[sizeoflist-1])
         {
-            s += ";";
+            printf(";");
         }
-        s += "]\n";
     }
-    printf("%s",s);
+    printf("]\n");
 }
 
 struct GNetwork MakeGradient(GNetwork gn, NeuralNetwork nn, int* Output)
