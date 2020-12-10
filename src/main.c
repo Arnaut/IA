@@ -7,6 +7,7 @@
 
 int main() {
     struct NeuralNetwork nn = initNN();
+    printf("i : %i",nn.LayerList[0].size);
     int tab1[8] = {0,0,0,1,1,0,1,1};
     int tab2[4] = {0,1,1,0};
     int nbtrain = 500;
