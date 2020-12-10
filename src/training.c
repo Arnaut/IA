@@ -6,6 +6,12 @@
 #include "training.h"
 #include <stdio.h>
 
+// data
+int sizeoflist = 3;
+int sizeofInput = 2;
+int InputList[2] = {0, 0};
+int sizesList[3] = {8, 8, 1};
+
 // Training Methods.
 struct GNetwork initGradient()
 {
