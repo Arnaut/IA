@@ -2,29 +2,28 @@
 // 08.12.2020/09:10
 
 #include "IAtoolsbox.h"
-#include "data.h"
-// data
-int sizeoflist = 3;
-int sizeofInput = 2;
-int InputList[2] = {0, 0};
-int sizesList[3] = {8, 8, 1};
 #include "neuralnetwork.h"
 #include "training.h"
 #include <stdio.h>
+// data
+int sizeofListeT = 3;
+int sizeofInputT = 2;
+int InputListT[2] = {0, 0};
+int sizesListT[3] = {8, 8, 1};
 
 // Training Methods.
 struct GNetwork initGradient()
 {
-    GLayer tab1[sizeoflist];
+    GLayer tab1[sizeofListeT];
     GNetwork Gn =
             {
-                    .size = sizeoflist,
+                    .size = sizeofListeT,
                     .LayerList = tab1,
             };
-    int psize = sizeofInput;
-    for (int i = 0; i < sizeoflist; ++i)
+    int psize = sizeofInputT;
+    for (int i = 0; i < sizeofListeT; ++i)
     {
-        int size = sizesList[i];
+        int size = sizesListT[i];
         Gradient tab2[size];
         GLayer l =
                 {
@@ -78,8 +77,8 @@ float derivativeValue(Neuron n,int k,Layer fl)
 void printTry(NeuralNetwork nn, int* Input, int* Output)
 {
     printf("|");
-    int l = sizeoflist - 1;
-    for (int n = 0; n < sizesList[l]; ++n)
+    int l = sizeofListeT - 1;
+    for (int n = 0; n < sizesListT[l]; ++n)
     {
         Neuron ner = nn.LayerList[l].NeuronList[n];
         printf("|");
@@ -87,19 +86,19 @@ void printTry(NeuralNetwork nn, int* Input, int* Output)
         printf("|");
     }
     printf(": [");
-    for (int i = 0; i < sizeofInput; ++i)
+    for (int i = 0; i < sizeofInputT; ++i)
     {
         printf("%i",Input[i]);
-        if (i != sizeofInput-1)
+        if (i != sizeofInputT-1)
         {
             printf(";");
         }
     }
     printf("] => [");
-    for (int j = 0; j < sizesList[sizeoflist-1]; ++j)
+    for (int j = 0; j < sizesListT[sizeofListeT-1]; ++j)
     {
         printf("%i",Output[j]);
-        if (j != sizesList[sizeoflist-1])
+        if (j != sizesListT[sizeofListeT-1])
         {
             printf(";");
         }
@@ -109,14 +108,14 @@ void printTry(NeuralNetwork nn, int* Input, int* Output)
 
 struct GNetwork MakeGradient(GNetwork gn, NeuralNetwork nn, int* Output)
 {
-    int l = sizeoflist-1;
+    int l = sizeofListeT-1;
     while (l >= 0)
     {
-        for (int n = 0; n < sizesList[l]; ++n)
+        for (int n = 0; n < sizesListT[l]; ++n)
         {
             Neuron ner = nn.LayerList[l].NeuronList[n];
             Gradient g = gn.LayerList[l].GradientList[n];
-            if (l == sizeoflist-1) ner.val = 2*(ner.val - Output[n]);
+            if (l == sizeofListeT-1) ner.val = 2*(ner.val - Output[n]);
             else
             {
                 ner.val = derivativeValue(ner,n,nn.LayerList[l+1]);
@@ -135,9 +134,9 @@ struct GNetwork MakeGradient(GNetwork gn, NeuralNetwork nn, int* Output)
 
 struct NeuralNetwork ApplyGradient(NeuralNetwork nn, GNetwork gn)
 {
-    for (int l = 0; l < sizeoflist; ++l)
+    for (int l = 0; l < sizeofListeT; ++l)
     {
-        for (int n = 0; n < sizesList[l]; ++n)
+        for (int n = 0; n < sizesListT[l]; ++n)
         {
             Neuron ner = nn.LayerList[l].NeuronList[n];
             Gradient g = gn.LayerList[l].GradientList[n];
@@ -156,15 +155,15 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
     GNetwork gn = initGradient();
     for (int t = 0; t < data; ++t)
     {
-        int Input[sizeofInput];
-        for (int i = 0; i < sizeofInput; ++i)
+        int Input[sizeofInputT];
+        for (int i = 0; i < sizeofInputT; ++i)
         {
-            Input[i] = trainInput[t*sizeofInput + i];
+            Input[i] = trainInput[t*sizeofInputT + i];
         }
-        int Output[sizesList[sizeoflist-1]];
-        for (int u = 0; u < sizesList[sizeoflist-1]; ++u)
+        int Output[sizesListT[sizeofListeT-1]];
+        for (int u = 0; u < sizesListT[sizeofListeT-1]; ++u)
         {
-            int index = t*sizesList[sizeoflist-1] + u;
+            int index = t*sizesListT[sizeofListeT-1] + u;
             Output[u] = trainOutput[index];
         }
         RunNeuralNetwork(nn, Input);
