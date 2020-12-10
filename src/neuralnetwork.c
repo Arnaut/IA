@@ -75,7 +75,7 @@ void RunNeuralNetwork(NeuralNetwork nn, int* Input)
 {
     nn.InputLayer = Input;
     //init first layer
-    printf("i : &i",nn.LayerList[0].size);
+    printf("i : %i",nn.LayerList[0].size);
     for (int i=0; i<nn.LayerList[0].size; i++)
     {
         nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
