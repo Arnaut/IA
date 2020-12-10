@@ -157,16 +157,16 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
     for (int t = 0; t < data; ++t)
     {
         int Input[sizeofInput];
-        for (int i = 0; i < sizeofInput/data; ++i)
+        for (int i = 0; i < sizeofInput; ++i)
         {
             Input[i] = trainInput[t*sizeofInput + i];
         }
         int Output[sizesList[sizeoflist-1]];
-        for (int o = 0; o < sizesList[sizeoflist-1]/data ;++o)
+        for (int o = 0; o < sizesList[sizeoflist-1];++o)
         {
             Output[0] = trainOutput[t*sizesList[sizeoflist-1] + o];
         }
-        RunNeuralNetwork(nn, Input);
+        //RunNeuralNetwork(nn, Input);
         gn = MakeGradient(gn,nn,&Output[t]);
         printTry(nn,&Input[t],&Output[t]);
         nn = ApplyGradient(nn,gn);
