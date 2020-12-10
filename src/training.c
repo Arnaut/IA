@@ -167,8 +167,8 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
             Output[0] = trainOutput[t*sizesList[sizeoflist-1] + o];
         }
         RunNeuralNetwork(nn, Input);
-        //gn = MakeGradient(gn,nn,Output);
-        printTry(nn,Input,Output);
+        gn = MakeGradient(gn,nn,Output);
+        //printTry(nn,Input,Output);
         nn = ApplyGradient(nn,gn);
     }
     return nn;
