@@ -15,7 +15,6 @@ int sizesList[3] = {8, 8, 1};
 // NeuralNetwork Methods.
 struct NeuralNetwork initNN()
 {
-    printf("init\n");
     Layer tab1[sizeoflist];
     NeuralNetwork nn =
             {
