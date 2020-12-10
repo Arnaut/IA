@@ -72,24 +72,33 @@ float derivativeValue(Neuron n,int k,Layer fl)
 
 void printTry(NeuralNetwork nn, int* Input, int* Output)
 {
-    char s = '|';
+    char* s = "|";
     int l = sizeoflist - 1;
     for (int n = 0; n < sizesList[l]; ++n)
     {
         Neuron ner = nn.LayerList[l].NeuronList[n];
-        s += '|' + (char)ner.val + '|';
+        s += "|" + (char*)ner.val + "|";
     }
-    s += ':'+' '+'[';
+    s += ": [";
     for (int i = 0; i < sizeofInput; ++i)
     {
         s += (char)Input[i];
         if (i != sizeofInput-1)
         {
-            s += ';';
+            s += ";";
         }
     }
-    s += ']';
-    printf("%c \n",s);
+    s += "] => [";
+    for (int j = 0; j < sizesList[sizeoflist-1]; ++j)
+    {
+        s += (char) Output[j];
+        if (j != sizesList[sizeoflist-1])
+        {
+            s += ";";
+        }
+        s += "]\n";
+    }
+    printf("%s",s);
 }
 
 struct GNetwork MakeGradient(GNetwork gn, NeuralNetwork nn, int* Output)
@@ -144,17 +153,17 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
         int Input[sizeofInput];
         for (int i = 0; i < sizeofInput; ++i)
         {
-            Input[i] = trainInput[t*sizeofInput + i]
+            Input[i] = trainInput[t*sizeofInput + i];
         }
         int Output[sizesList[sizeoflist-1]];
         for (int o = 0; o < sizesList[sizeoflist-1]; ++o)
         {
-            Output[0] = trainOutput[t*sizesList[sizeoflist-1] + o]
+            Output[0] = trainOutput[t*sizesList[sizeoflist-1] + o];
         }
         RunNeuralNetwork(nn, Input);
-        gn = MakeGradient(gn,nn,Output[t]);
-        printTry(nn,Input[t],Output[t]);
-        nn = ApplyGradient(nn,gn)
+        gn = MakeGradient(gn,nn,&Output[t]);
+        printTry(nn,&Input[t],&Output[t]);
+        nn = ApplyGradient(nn,gn);
     }
     return nn;
 }
