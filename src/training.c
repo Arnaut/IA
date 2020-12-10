@@ -168,8 +168,8 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
         }
         RunNeuralNetwork(nn, Input);
         gn = MakeGradient(gn,nn,Output);
-        //printTry(nn,Input,Output);
-        nn = ApplyGradient(nn,gn);
+        printTry(nn,Input,Output);
+        //nn = ApplyGradient(nn,gn);
     }
     return nn;
 }
