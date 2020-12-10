@@ -167,7 +167,7 @@ struct NeuralNetwork backpropagation(int* trainInput, int* trainOutput, int data
             int index = t*sizesList[sizeoflist-1] + u;
             Output[u] = trainOutput[index];
         }
-
+        printf("%i\n",Output[0]);
         printf("yup\n");
         RunNeuralNetwork(nn, Input);
         printf("yup\n");
