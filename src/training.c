@@ -2,6 +2,7 @@
 // 08.12.2020/09:10
 
 #include "IAtoolsbox.h"
+#include "data.h"
 #include "neuralnetwork.h"
 #include "training.h"
 #include <stdio.h>
