@@ -55,29 +55,30 @@ struct NeuralNetwork initNN()
 }
 
 // Methods:Propagation
-void RunLayers(struct Layer L,struct Layer Lminus1){
-  for( size_t i=0; i<L.size;i++){
-    L.NeuronList[i].net = L.NeuronList[i].bias;
-    for(size_t j; j<Lminus1.size; j++)
-    {
-      L.NeuronList[i].net += Lminus1.NeuronList[j].val*L.NeuronList[i].weights[j];
+void RunLayers(Layer L,Layer Lminus1){
+    for(int i=0; i<L.size;i++){
+        L.NeuronList[i].net = L.NeuronList[i].bias;
+        for(size_t j; j<Lminus1.size; j++){
+            int z = L.NeuronList[i].net;
+            L.NeuronList[i].net += Lminus1.NeuronList[j].val*L.NeuronList[i].weights[j];
+        }
+        L.NeuronList[i].val = sigmoid(L.NeuronList[i].net);
     }
-    L.NeuronList[i].val = sigmoid(L.NeuronList[i].net);
-  }
 }
-  
 
-void RunNeuralNetwork(struct NeuralNetwork nn, int* Input){
-  nn.InputLayer = Input;
-  //init first layer
-  for (size_t i=0; i<nn.LayerList[0].size; i++){
-    nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
-    for (size_t j=0 ; j<nn.inputsize; j++){
-      nn.LayerList[0].NeuronList[i].net += Input[i]*nn.LayerList[0].NeuronList[i].weights[j];
+
+void RunNeuralNetwork(NeuralNetwork nn, int* Input){
+    nn.InputLayer = Input;
+    //init first layer
+    for (int i=0; i<nn.LayerList[0].size; i++){
+        nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
+        for (int j=0 ; j<nn.inputsize; j++){
+            nn.LayerList[0].NeuronList[i].net += Input[i]*nn.LayerList[0].NeuronList[i].weights[j];
+        }
+        nn.LayerList[0].NeuronList[i].val = sigmoid(nn.LayerList[0].NeuronList[i].net);
     }
-    nn.LayerList[0].NeuronList[i].val = sigmoid(nn.LayerList[0].NeuronList[i].net);
-  }
-  for (size_t l=1; l<nn.size; l++){
-    RunLayers(nn.LayerList[l],nn.LayerList[l-1]);
-  }
+    for (int l=1; l<nn.size; l++){
+        RunLayers(nn.LayerList[l],nn.LayerList[l-1]);
+    }
 }
+
