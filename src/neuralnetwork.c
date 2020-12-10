@@ -69,18 +69,23 @@ void RunLayers(Layer L,Layer Lminus1){
 
 void RunNeuralNetwork(NeuralNetwork nn, int* Input)
 {
+    printf("yup\n");
     nn.InputLayer = Input;
+    printf("yup1\n");
     //init first layer
     for (int i=0; i<nn.LayerList[0].size; i++)
     {
+        printf("i: %i]\n",i);
         nn.LayerList[0].NeuronList[i].net = nn.LayerList[0].NeuronList[i].bias;
         for (int j=0 ; j<nn.inputsize; j++)
         {
+            printf("j: %i]\n",j);
             nn.LayerList[0].NeuronList[i].net += Input[i]*nn.LayerList[0].NeuronList[i].weights[j];
         }
         nn.LayerList[0].NeuronList[i].val = sigmoid(nn.LayerList[0].NeuronList[i].net);
     }
     for (int l=1; l<nn.size; l++){
+        printf("l: %i]\n",l);
         RunLayers(nn.LayerList[l],nn.LayerList[l-1]);
     }
 }
